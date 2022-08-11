@@ -1,0 +1,4 @@
+name: Meme
+version: '${project.version}'
+main: me.matthewstevens.meme.Meme
+api-version: 1.19
