@@ -14,7 +14,7 @@ public class damageListener implements Listener {
     @EventHandler
     public void onPlayerDamage(EntityDamageEvent e){
         int rand = (int)(Math.random() * range) + min;
-        if (rand > 50){
+        if (rand > 20){
             if(e.getClass().getName() == "PLAYER") {
                 Player hurtplayer = (Player) e.getEntity();
                 String hurtplayerString = hurtplayer.getDisplayName();

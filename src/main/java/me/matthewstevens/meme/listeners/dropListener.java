@@ -14,7 +14,7 @@ public class dropListener implements Listener {
     @EventHandler
     public void onPlayerDrop(PlayerDropItemEvent event){
         int rand = (int)(Math.random() * range) + min;
-        if (rand > 50){
+        if (rand > 80){
             Bukkit.getServer().broadcastMessage("<"+event.getPlayer().getDisplayName()+"> Oopsie I dropped an item");
         }
     }

@@ -15,7 +15,7 @@ public class swingSwordListener implements Listener {
     @EventHandler
     public void onPlayerDamage(EntityDamageByEntityEvent e){
         int rand = (int)(Math.random() * range) + min;
-        if (rand > 50){
+        if (rand > 20){
             if (e.getDamager() instanceof Player){
                 Player player = (Player) e.getDamager();
                 if (player.getInventory().getItemInMainHand().equals(Material.DIAMOND_SWORD)) {
