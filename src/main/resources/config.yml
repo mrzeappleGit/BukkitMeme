@@ -1,8 +1,11 @@
+#Set Bools to either true or false
+#Set Detection numbers to 1-99 the higher the less likely it will trigger (MUST BE WHOLE NUMBERS)
+
 DamageDetectionBool: true
-DamageDetection: 5
+DamageDetection: 95
 EatDetectionBool: true
-EatDetection: 5
+EatDetection: 95
 DropDetectionBool: true
-DropDetection: 1
+DropDetection: 98
 SwordSwingDetectionBool: true
-SwordSwingDetection: 1
+SwordSwingDetection: 98

@@ -17,8 +17,10 @@ public class swingSwordListener implements Listener {
 
     FileConfiguration config = plugin.getConfig();
 
-    int percentage = config.getInt("SwordSwingDetection");
-    boolean listen = config.getBoolean("SwordSwingDetectionBool");
+    String percentage = config.getString("SwordSwingDetection");
+    String listenString = Objects.requireNonNull(config.getString("SwordSwingBool")).toLowerCase();
+    boolean listen = Boolean.parseBoolean(listenString);
+    int percentageInt = Integer.parseInt(percentage);
     int max = 100;
     int min = 1;
     int range = max - min + 1;
@@ -26,7 +28,7 @@ public class swingSwordListener implements Listener {
     public void onPlayerDamage(EntityDamageByEntityEvent e){
         int rand = (int)(Math.random() * range) + min;
         if(listen) {
-            if (rand > percentage) {
+            if (rand > percentageInt) {
                 if (e.getDamager() instanceof Player) {
                     Player player = (Player) e.getDamager();
                     if (player.getInventory().getItemInMainHand().getType() == Material.DIAMOND_SWORD) {
