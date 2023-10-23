@@ -1,6 +1,7 @@
 package me.matthewstevens.meme.listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,26 +12,35 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 
 import java.util.function.Supplier;
 
+import static me.matthewstevens.meme.Meme.plugin;
+
 public class damageListener implements Listener {
+    FileConfiguration config = plugin.getConfig();
+
+    String percentage = config.getString("DamageDetection");
+    boolean listen = config.getBoolean("DamageDetectionBool");
+
+    int percentageInt = Integer.parseInt(percentage);
     int max = 100;
     int min = 1;
     int range = max - min + 1;
     @EventHandler
-    public void onPlayerDamage(EntityDamageEvent e){
-        if (!(e.getEntity().getType() == EntityType.PLAYER)) {
-            return; // It's not a player, so we just return
-        }
-        int rand = (int)(Math.random() * range) + min;
-        Bukkit.getServer().getLogger().info(String.valueOf(rand));
-        if(rand > 50){
-            if(e.getCause().equals(DamageCause.FALL)){
-                Player hurtplayer = (Player) e.getEntity();
-                String hurtplayerString = hurtplayer.getDisplayName();
-                Bukkit.getServer().broadcastMessage("Oopsie woopsie " + hurtplayerString + " did a fally wally.");
-            } else {
-                Player hurtplayer = (Player) e.getEntity();
-                String hurtplayerString = hurtplayer.getDisplayName();
-                Bukkit.getServer().broadcastMessage(hurtplayerString + " needs some milk.");
+    public void onPlayerDamage(EntityDamageEvent e) {
+        if (listen) {
+            if (!(e.getEntity().getType() == EntityType.PLAYER)) {
+                return; // It's not a player, so we just return
+            }
+            int rand = (int) (Math.random() * range) + min;
+            if (rand > percentageInt) {
+                if (e.getCause().equals(DamageCause.FALL)) {
+                    Player hurtplayer = (Player) e.getEntity();
+                    String hurtplayerString = hurtplayer.getDisplayName();
+                    Bukkit.getServer().broadcastMessage("Oopsie woopsie " + hurtplayerString + " did a fally wally.");
+                } else {
+                    Player hurtplayer = (Player) e.getEntity();
+                    String hurtplayerString = hurtplayer.getDisplayName();
+                    Bukkit.getServer().broadcastMessage(hurtplayerString + " needs some milk.");
+                }
             }
         }
     }

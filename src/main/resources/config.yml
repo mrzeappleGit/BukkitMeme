@@ -1,0 +1,8 @@
+DamageDetectionBool: true
+DamageDetection: 5
+EatDetectionBool: true
+EatDetection: 5
+DropDetectionBool: true
+DropDetection: 1
+SwordSwingDetectionBool: true
+SwordSwingDetection: 1
