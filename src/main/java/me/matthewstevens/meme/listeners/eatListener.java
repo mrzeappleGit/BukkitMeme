@@ -18,7 +18,7 @@ public class eatListener implements Listener {
     FileConfiguration config = plugin.getConfig();
 
     String percentage = config.getString("EatDetection");
-    String listenString = Objects.requireNonNull(config.getString("EatBool")).toLowerCase();
+    String listenString = Objects.requireNonNull(config.getString("EatDetectionBool")).toLowerCase();
     boolean listen = Boolean.parseBoolean(listenString);
     int percentageInt = Integer.parseInt(percentage);
     int max = 100;

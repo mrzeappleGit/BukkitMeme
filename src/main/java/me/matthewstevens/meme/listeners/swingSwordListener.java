@@ -18,7 +18,7 @@ public class swingSwordListener implements Listener {
     FileConfiguration config = plugin.getConfig();
 
     String percentage = config.getString("SwordSwingDetection");
-    String listenString = Objects.requireNonNull(config.getString("SwordSwingBool")).toLowerCase();
+    String listenString = Objects.requireNonNull(config.getString("SwordSwingDetectionBool")).toLowerCase();
     boolean listen = Boolean.parseBoolean(listenString);
     int percentageInt = Integer.parseInt(percentage);
     int max = 100;
