@@ -1,9 +1,6 @@
 package me.matthewstevens.meme;
 
-import me.matthewstevens.meme.listeners.damageListener;
-import me.matthewstevens.meme.listeners.dropListener;
-import me.matthewstevens.meme.listeners.eatListener;
-import me.matthewstevens.meme.listeners.swingSwordListener;
+import me.matthewstevens.meme.listeners.*;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Listener;
@@ -22,6 +19,8 @@ public final class Meme extends JavaPlugin{
         getServer().getPluginManager().registerEvents(new dropListener(), this);
         getServer().getPluginManager().registerEvents(new damageListener(), this);
         getServer().getPluginManager().registerEvents(new swingSwordListener(), this);
+        getServer().getPluginManager().registerEvents(new chickenJockeyListener(), this);
+        getServer().getPluginManager().registerEvents(new diamondMineListener(), this);
 
     }
 

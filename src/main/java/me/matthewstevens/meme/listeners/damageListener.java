@@ -1,6 +1,6 @@
 package me.matthewstevens.meme.listeners;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import me.matthewstevens.meme.helper.randNumGen;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
@@ -9,10 +9,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.player.PlayerDropItemEvent;
 
 import java.util.Objects;
-import java.util.function.Supplier;
 
 import static me.matthewstevens.meme.Meme.plugin;
 
@@ -22,17 +20,17 @@ public class damageListener implements Listener {
     String percentage = config.getString("DamageDetection");
     String listenString = Objects.requireNonNull(config.getString("DamageDetectionBool")).toLowerCase();
     boolean listen = Boolean.parseBoolean(listenString);
-    int percentageInt = Integer.parseInt(percentage);
-    int max = 100;
+    double percentageInt = Double.parseDouble(percentage);
+    int max = 1000;
     int min = 1;
-    int range = max - min + 1;
     @EventHandler
     public void onPlayerDamage(EntityDamageEvent e) {
         if (listen) {
             if (!(e.getEntity().getType() == EntityType.PLAYER)) {
                 return; // It's not a player, so we just return
             }
-            int rand = (int) (Math.random() * range) + min;
+            randNumGen rng = new randNumGen();
+            double rand = rng.numGen(min, max);
             if (rand > percentageInt) {
                 if (e.getCause().equals(DamageCause.FALL)) {
                     Player hurtplayer = (Player) e.getEntity();

@@ -1,6 +1,7 @@
 package me.matthewstevens.meme.listeners;
 
 import me.matthewstevens.meme.Meme;
+import me.matthewstevens.meme.helper.randNumGen;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -20,13 +21,13 @@ public class swingSwordListener implements Listener {
     String percentage = config.getString("SwordSwingDetection");
     String listenString = Objects.requireNonNull(config.getString("SwordSwingDetectionBool")).toLowerCase();
     boolean listen = Boolean.parseBoolean(listenString);
-    int percentageInt = Integer.parseInt(percentage);
-    int max = 100;
+    double percentageInt = Double.parseDouble(percentage);
+    int max = 1000;
     int min = 1;
-    int range = max - min + 1;
     @EventHandler
     public void onPlayerDamage(EntityDamageByEntityEvent e){
-        int rand = (int)(Math.random() * range) + min;
+        randNumGen rng = new randNumGen();
+        double rand = rng.numGen(min, max);
         if(listen) {
             if (rand > percentageInt) {
                 if (e.getDamager() instanceof Player) {

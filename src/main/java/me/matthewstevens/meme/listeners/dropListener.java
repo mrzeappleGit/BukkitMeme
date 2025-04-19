@@ -1,6 +1,7 @@
 package me.matthewstevens.meme.listeners;
 
 import me.matthewstevens.meme.Meme;
+import me.matthewstevens.meme.helper.randNumGen;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
@@ -19,13 +20,13 @@ public class dropListener implements Listener {
     String percentage = config.getString("DropDetection");
     String listenString = Objects.requireNonNull(config.getString("DropDetectionBool")).toLowerCase();
     boolean listen = Boolean.parseBoolean(listenString);
-    int percentageInt = Integer.parseInt(percentage);
-    int max = 100;
+    double percentageInt = Double.parseDouble(percentage);
+    int max = 1000;
     int min = 1;
-    int range = max - min + 1;
     @EventHandler
     public void onPlayerDrop(PlayerDropItemEvent event) {
-        int rand = (int) (Math.random() * range) + min;
+        randNumGen rng = new randNumGen();
+        double rand = rng.numGen(min, max);
         if (listen) {
             if (rand > percentageInt) {
                 Bukkit.getServer().broadcastMessage("<" + event.getPlayer().getDisplayName() + "> Oopsie I dropped an item");
