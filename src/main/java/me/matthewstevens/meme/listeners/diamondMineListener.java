@@ -1,5 +1,6 @@
 package me.matthewstevens.meme.listeners;
 
+import me.matthewstevens.meme.helper.randNumGen;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -15,7 +16,7 @@ public class diamondMineListener implements Listener {
     FileConfiguration config = plugin.getConfig();
 
     String percentage = config.getString("DiamondMineDetection");
-    String listenString = Objects.requireNonNull(config.getString("CDiamondMineDetectionBool")).toLowerCase();
+    String listenString = Objects.requireNonNull(config.getString("DiamondMineDetectionBool")).toLowerCase();
 
     boolean listen = Boolean.parseBoolean(listenString);
     double percentageInt = Double.parseDouble(percentage);
@@ -26,8 +27,12 @@ public class diamondMineListener implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         if(listen) {
             if (event.getBlock().getType() == Material.DIAMOND_ORE) {
-                // Code to execute when a diamond ore is mined goes here
-                Bukkit.getServer().broadcastMessage("<" + event.getPlayer().getDisplayName() + "> I yearn for the mine!");
+                randNumGen rng = new randNumGen();
+                double rand = rng.numGen(min, max);
+                if (rand > percentageInt) {
+                    // Code to execute when a diamond ore is mined goes here
+                    Bukkit.getServer().broadcastMessage("<" + event.getPlayer().getDisplayName() + "> I yearn for the mine!");
+                }
             }
         }
     }
