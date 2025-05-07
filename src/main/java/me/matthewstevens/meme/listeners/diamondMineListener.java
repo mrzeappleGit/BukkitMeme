@@ -26,7 +26,7 @@ public class diamondMineListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         if(listen) {
-            if (event.getBlock().getType() == Material.DIAMOND_ORE) {
+            if (event.getBlock().getType() == Material.DIAMOND_ORE || event.getBlock().getType() == Material.DEEPSLATE_DIAMOND_ORE || event.getBlock().getType() == Material.LAPIS_ORE || event.getBlock().getType() == Material.DEEPSLATE_LAPIS_ORE) {
                 randNumGen rng = new randNumGen();
                 double rand = rng.numGen(min, max);
                 if (rand > percentageInt) {
